@@ -1,6 +1,6 @@
 <!-- 
     Example of how to initiate a payment using the fapshi PHP SDK
-    Before running this script, make sure to add your apiuser and apikey in the Fapshi.php file
+    Before running this script, make sure to add your apiuser and apikey to your Fapshi.php file
 -->
 <?php
 include 'Fapshi.php';

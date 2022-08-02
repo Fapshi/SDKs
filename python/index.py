@@ -1,5 +1,5 @@
 # Example of how to initiate a payment using the fapshi python SDK
-# Before running this, make sure to have axios installed and add your apiuser and apikey in the fapshi.js file
+# Before running this, make sure to have requests installed. Also, add your apiuser and apikey to your fapshi.py file
 import fapshi
 
 payment = {
