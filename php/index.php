@@ -12,7 +12,8 @@ $payment= array(
     'externalId'=> '12345',
     'userId'=> 'abcde',
     'redirectUrl'=> 'https://mywebsite.com',
-    'message'=> 'testing php SDK'
+    'message'=> 'testing php SDK',
+    // 'cardOnly'=> true
 ); 
 
 $resp = $fapshi->initiate_pay($payment);

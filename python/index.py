@@ -8,7 +8,8 @@ payment = {
     'externalId': '12345',
     'userId': 'abcde',
     'redirectUrl': 'https://mywebsite.com',
-    'message':'python SDK testing' 
+    'message': 'python SDK testing',
+    'cardOnly': True 
 }
 
 resp = fapshi.initiate_pay(payment)

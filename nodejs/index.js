@@ -9,7 +9,8 @@ const fapshi = require('./fapshi');
         externalId: '12345',
         userId: 'abcde',
         redirectUrl: 'https://mywebsite.com',
-        message: 'testing SDK nodejs'
+        message: 'testing SDK nodejs',
+        // cardOnly: true 
     }
     const resp = await fapshi.initiatePay(payment)
     console.log(resp)
