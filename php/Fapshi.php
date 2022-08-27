@@ -14,13 +14,13 @@ class Fapshi {
         if(!is_array($data)){
             $error = array('message'=>'invalid type, array expected','statusCode'=>400);
         }
-        if(!array_key_exists('amount', $data)){
+        else if(!array_key_exists('amount', $data)){
             $error = array('message'=>'amount required','statusCode'=>400);
         }
-        if(!is_int($data['amount'])){
+        else if(!is_int($data['amount'])){
             $error = array('message'=>'amount must be of type integer','statusCode'=>400);
         }
-        if($data['amount']<100){
+        else if($data['amount']<100){
             $error = array('message'=>'amount cannot be less than 100 XAF','statusCode'=>400);
         }
         if(isset($error)){
@@ -28,6 +28,51 @@ class Fapshi {
         }
 
         $url = Fapshi::BASEURL.'/initiate-pay';
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => Fapshi::HEADERS,
+        ));
+
+        $response = curl_exec($curl);
+        $response = json_decode($response, true);
+        $response['statusCode'] = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+        return $response;
+    }
+    
+
+    public function direct_pay(array $data) : array {
+        if(!is_array($data)){
+            $error = array('message'=>'invalid type, array expected','statusCode'=>400);
+        }
+        else if(!array_key_exists('amount', $data)){
+            $error = array('message'=>'amount required','statusCode'=>400);
+        }
+        else if(!is_int($data['amount'])){
+            $error = array('message'=>'amount must be of type integer','statusCode'=>400);
+        }
+        else if($data['amount']<100){
+            $error = array('message'=>'amount cannot be less than 100 XAF','statusCode'=>400);
+        }
+        else if(!array_key_exists('phone', $data)){
+            $error = array('message'=>'phone number required','statusCode'=>400);
+        }
+        else if(!is_string($data['phone'])){
+            $error = array('message'=>'phone must be of type string','statusCode'=>400);
+        }
+        else if(!preg_match('/^6[0-9]{8}$/', $data['phone'])){
+            $error = array('message'=>'invalid phone number','statusCode'=>400);
+        }
+        if(isset($error)){
+            return $error;
+        }
+
+        $url = Fapshi::BASEURL.'/direct-pay';
         $curl = curl_init();
 
         curl_setopt_array($curl, array(

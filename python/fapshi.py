@@ -44,6 +44,55 @@ def initiate_pay(data: dict):
 
 
 
+def direct_pay(data: dict):
+    '''
+        This function directly initiates a payment request to a user's mobile device and
+        returns a dictionary with a transId that can be used to get the status of the payment
+
+        required *
+
+        data = {
+            "amount": Integer *,
+            "phone": String  *,
+            "medium": String,
+            "name": String,
+            "email": String,
+            "userId": String,
+            "externalId": String,
+            "message": String
+        }
+    '''
+    if(type(data) is not dict):
+        return {'statusCode':400, 'message':'invalid type, dictionary expected'}
+
+    key = 'amount'
+    if(key not in data):
+        return {'statusCode':400, 'message':'amount required'}
+
+    if(type(data['amount']) is not int):
+        return {'statusCode':400, 'message':'amount must be of type integer'}
+
+    if(data['amount']<100):
+        return {'statusCode':400, 'message':'amount cannot be less than 100 XAF'}
+
+    key = 'phone'
+    if(key not in data):
+        return {'statusCode':400, 'message':'phone number required'}
+
+    if(type(data['phone']) is not str):
+        return {'statusCode':400, 'message':'phone must be of type string'}
+
+    if(not re.search('^6[0-9]{8}$',data['phone'])):
+        return {'statusCode':400, 'message':'invalid phone number'}
+
+    url = base_url+'/direct-pay'
+    r = requests.post(url=url, json=data, headers=headers)
+    resp = r.json()
+    resp['statusCode'] = r.status_code
+    return resp
+
+
+
 def payment_status(trans_id: str):
     '''
         This function returns a dictionary containing the details of the transaction with associated with the Id passed as parameter
