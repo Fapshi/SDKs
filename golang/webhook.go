@@ -27,7 +27,7 @@ type FapshiWebhookResponse struct {
 }
 
 func FapshiWebhook(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
+	if r.Method != http.MethodPost {
 		http.Error(w, "Route "+r.Method+": "+r.URL.Path+" not found", http.StatusNotFound)
 		return
 	}
