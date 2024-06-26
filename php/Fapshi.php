@@ -95,7 +95,7 @@ class Fapshi {
         if(!is_string($transId) || empty($transId)){
             return array('message'=>Fapshi::INVALID_STR,'statusCode'=>400);
         }
-        if(!preg_match('/^[a-zA-Z0-9]{8,9}$/', $transId)){
+        if(!preg_match('/^[a-zA-Z0-9]{8,10}$/', $transId)){
             return array('message'=>'invalid transaction id','statusCode'=>400);
         }
 
