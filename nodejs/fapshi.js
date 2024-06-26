@@ -106,7 +106,7 @@ module.exports = {
             try {
                 if(!transId || typeof transId !== 'string')
                     resolve(error('invalid type, string expected', 400))
-                if(!/^[a-zA-Z0-9]{8,9}$/.test(transId))
+                if(!/^[a-zA-Z0-9]{8,10}$/.test(transId))
                     resolve(error('invalid transaction id', 400))
 
                 const config = {
