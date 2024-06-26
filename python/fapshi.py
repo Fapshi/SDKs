@@ -100,7 +100,7 @@ def payment_status(trans_id: str):
     if(type(trans_id) is not str) or (not trans_id):
         return {'statusCode':400, 'message':invalid_str}
 
-    if(not re.search('^[a-zA-Z0-9]{8,9}$',trans_id)):
+    if(not re.search('^[a-zA-Z0-9]{8,10}$',trans_id)):
         return {'statusCode':400, 'message':'invalid transaction id'}
 
     url = base_url+'/payment-status/'+trans_id
