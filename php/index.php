@@ -13,9 +13,22 @@ $payment= array(
     'userId'=> 'abcde',
     'redirectUrl'=> 'https://mywebsite.com',
     'message'=> 'testing php SDK',
-    // 'cardOnly'=> true
 ); 
-
 $resp = $fapshi->initiate_pay($payment);
 echo json_encode($resp);
+
+
+// Example of how to search/filter transctions using the fapshi PHP SDK
+$query= array(
+    // 'amt'=> '500',
+    // 'status'=> 'SUCCESSFUL',
+    // 'medium'=> 'orange money',
+    'limit'=> 3,
+    'sort'=> 'asc',
+    'start'=> '2023-12-01',
+    'end'=> '2024-12-01',
+); 
+$trans = $fapshi->search($query);
+echo json_encode($trans);
+
 

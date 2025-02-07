@@ -10,7 +10,6 @@ const fapshi = require('./fapshi');
         userId: 'abcde',
         redirectUrl: 'https://mywebsite.com',
         message: 'testing SDK nodejs',
-        // cardOnly: true 
     }
     const resp = await fapshi.initiatePay(payment)
     console.log(resp)
